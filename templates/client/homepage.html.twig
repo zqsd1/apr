@@ -10,9 +10,11 @@
 
 <ul>
 {% for client in clients %}
-    <li>{{client.nom}} - {{client.prenom}} - <button>click</click></li>
+    <li>{{client.nom}} - {{client.prenom}} -<a href="{{ path('detailClient',{
+        'clientid': client.id
+        }) }}" >detail</a></li>
 {% endfor %}
-<li>1 -2 -3 -4 <button onclick="window.location.href= {{ path('newclient') }};">click</button></li>
+<li>1 -2 -3 -4 </li>
 </ul>
 <a href={{ path('newclient') }}>nouveau</a>
 {% endblock %}
