@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block body %}
+<div>
+<button>nouveau</button>
+</div>
+
+<ul>
+{% for client in clients %}
+    <li>{{client}} - <button>click</click></li>
+{% endfor %}
+<li>1 -2 -3 -4 <button onclick="window.location.href= {{ path('nouveauClient') }};">click</button></li>
+</ul>
+<a href={{ path('nouveauClient') }}>nouveau</a>
+{% endblock %}
