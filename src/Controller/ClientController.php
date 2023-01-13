@@ -53,6 +53,34 @@ class ClientController extends AbstractController
      */
     public function detailClient($clientid = null): Response
     {
+        $clients = [
+            [
+                "id" => "0",
+                "nom" => "a",
+                "prenom" => "b",
+                "phone" => "0123456789",
+            ],
+            [
+                "id" => "1",
+                "nom" => "t",
+                "prenom" => "t",
+                "phone" => "0123456789",
+            ],
+            [
+                "id" => "2",
+                "nom" => "o",
+                "prenom" => "m",
+                "phone" => "0123456789",
+            ],
+            [
+                "id" => "3",
+                "nom" => "p",
+                "prenom" => "b",
+                "phone" => "0123456789",
+            ],
+        ];
+        
+        return $this->json($clients[$clientid]);
 
         return new Response("browse:$clientid");
         // return $this->render('$0.html.twig', []);
