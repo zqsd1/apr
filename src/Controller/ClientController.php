@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Form\ClientType;
+use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,12 +17,11 @@ class ClientController extends AbstractController
      * @Route("/",name="client")
      */
 
-    public function homepage(EntityManagerInterface $entityManager): Response
+    public function homepage(ClientRepository $repo): Response
     {
 
-        $clientRepo = $entityManager->getRepository(Client::class);
-        $clients = $clientRepo->findAll();
- 
+        $clients = $repo->findAll();
+
         return $this->render('client/homepage.html.twig', [
             'title' => 'coucou',
             'clients' => $clients,
@@ -32,39 +32,13 @@ class ClientController extends AbstractController
      * @Route("/client/{clientid}", name="detailClient")
  
      */
-    public function detailClient($clientid = null): Response
+    public function detailClient($clientid = null, ClientRepository $repo): Response
     {
-        $clients = [
-            [
-                "id" => "0",
-                "nom" => "a",
-                "prenom" => "b",
-                "phone" => "0123456789",
-            ],
-            [
-                "id" => "1",
-                "nom" => "t",
-                "prenom" => "t",
-                "phone" => "0123456789",
-            ],
-            [
-                "id" => "2",
-                "nom" => "o",
-                "prenom" => "m",
-                "phone" => "0123456789",
-            ],
-            [
-                "id" => "3",
-                "nom" => "p",
-                "prenom" => "b",
-                "phone" => "0123456789",
-            ],
-        ];
+        $client = $repo->find($clientid);
 
-        return $this->json($clients[$clientid]);
 
-        return new Response("browse:$clientid");
-        // return $this->render('$0.html.twig', []);
+        // return new Response("browse:{$clientid}");
+         return $this->render('client/detail.html.twig', ['client'=> $client]);
     }
 
     /**
