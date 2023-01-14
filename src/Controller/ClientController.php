@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
+use App\Form\ClientType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,7 +18,7 @@ class ClientController extends AbstractController
 
     public function homepage(): Response
     {
-        
+
         $clients = [
             [
                 "id" => "1",
@@ -79,7 +83,7 @@ class ClientController extends AbstractController
                 "phone" => "0123456789",
             ],
         ];
-        
+
         return $this->json($clients[$clientid]);
 
         return new Response("browse:$clientid");
@@ -89,10 +93,23 @@ class ClientController extends AbstractController
     /**
      * @Route("/newclient", name="newclient")
      */
-    public function newClient(): Response
+    public function newClient(Request $request, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('/client/nouveauClient.html.twig', []);
+        $client = new Client();
+
+        $form = $this->createForm(ClientType::class, $client);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $client = $form->getData();
+            $entityManager->persist($client);
+            $entityManager->flush();
+            return $this->redirectToRoute('client');
+        }
+
+        return $this->render('/client/nouveauClient.html.twig', ['form' => $form,]);
     }
+
 
 
     /**
@@ -127,7 +144,7 @@ class ClientController extends AbstractController
                 "phone" => "0123456789",
             ],
         ];
-        
+
         return $this->json($clients);
     }
 }
