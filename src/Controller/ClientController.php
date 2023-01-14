@@ -16,35 +16,12 @@ class ClientController extends AbstractController
      * @Route("/",name="client")
      */
 
-    public function homepage(): Response
+    public function homepage(EntityManagerInterface $entityManager): Response
     {
 
-        $clients = [
-            [
-                "id" => "1",
-                "nom" => "a",
-                "prenom" => "b",
-                "phone" => "0123456789",
-            ],
-            [
-                "id" => "2",
-                "nom" => "t",
-                "prenom" => "t",
-                "phone" => "0123456789",
-            ],
-            [
-                "id" => "3",
-                "nom" => "o",
-                "prenom" => "m",
-                "phone" => "0123456789",
-            ],
-            [
-                "id" => "4",
-                "nom" => "p",
-                "prenom" => "b",
-                "phone" => "0123456789",
-            ],
-        ];
+        $clientRepo = $entityManager->getRepository(Client::class);
+        $clients = $clientRepo->findAll();
+ 
         return $this->render('client/homepage.html.twig', [
             'title' => 'coucou',
             'clients' => $clients,
