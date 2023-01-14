@@ -60,7 +60,7 @@ class InterventionController extends AbstractController
             return $this->redirectToRoute('app_intervention_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('intervention/edit.html.twig', [
+        return $this->render('intervention/edit.html.twig', [
             'intervention' => $intervention,
             'form' => $form,
         ]);

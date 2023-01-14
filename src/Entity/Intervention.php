@@ -27,6 +27,11 @@ class Intervention
     #[ORM\JoinColumn(nullable: false)]
     private ?Client $client = null;
 
+    public function __construct()
+    {
+        $this->created_on = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
