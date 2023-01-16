@@ -43,11 +43,11 @@ class ClientController extends AbstractController
     #[Route('/{id}', name: 'app_client_show', methods: ['GET'])]
     public function show(Client $client): Response
     {   
-        $c = $client->getInterventions();
+        $interventions = $client->getInterventions();
         // dd($c);
         return $this->render('client/show.html.twig', [
             'client' => $client,
-            'interventions'=>$c,
+            'interventions'=>$interventions,
         ]);
     }
 

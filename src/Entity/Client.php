@@ -72,7 +72,7 @@ class Client
 
         return $this;
     }
-
+    
     /**
      * @return Collection<int, Intervention>
      */
