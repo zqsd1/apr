@@ -12,6 +12,8 @@
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Phone</th>
+                <th>ville</th>
+                <th>mail</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,6 +23,8 @@
                 <td>{{ client.id }}</td>
                 <td>{{ client.nom }}</td>
                 <td>{{ client.prenom }}</td>
+                <td>{{ client.ville }}</td>
+                <td><a href="mail:{{ client.phone }}">{{ client.mail }}</td>
                 <td><a href="tel:{{ client.phone }}">{{ client.phone }}</a></td>
                 <td>
                     <a href="{{ path('app_client_show', {'id': client.id}) }}">show</a>
