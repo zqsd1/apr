@@ -27,6 +27,12 @@ class Client
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Intervention::class)]
     private Collection $interventions;
 
+    #[ORM\Column(length: 255)]
+    private ?string $mail = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $ville = null;
+
     public function __construct()
     {
         $this->interventions = new ArrayCollection();
@@ -99,6 +105,30 @@ class Client
                 $intervention->setClient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
 
         return $this;
     }
