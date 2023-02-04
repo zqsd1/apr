@@ -6,6 +6,7 @@ use App\Entity\Client;
 use App\Entity\Intervention;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,7 +20,7 @@ class InterventionType extends AbstractType
             ->add('finished_on')
             ->add('client', EntityType::class,[
                 'class'=>Client::class,
-                'choice_label'=>'id',
+                'choice_label'=>'fullName',
             ]);
     }
 
