@@ -60,6 +60,11 @@ class Client
         return $this->prenom;
     }
 
+    public function getFullName(): ?string
+    {
+        return $this->prenom . " ". $this->nom;
+    }
+
     public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
@@ -78,7 +83,7 @@ class Client
 
         return $this;
     }
-    
+
     /**
      * @return Collection<int, Intervention>
      */
