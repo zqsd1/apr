@@ -18,6 +18,7 @@ class InterventionType extends AbstractType
             ->add('nom')
             ->add('created_on')
             ->add('finished_on')
+            ->add('commentaire')
             ->add('client', EntityType::class,[
                 'class'=>Client::class,
                 'choice_label'=>'fullName',
