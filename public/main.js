@@ -1,4 +1,4 @@
-document.querySelectorAll(".table").forEach((table) =>
+document.querySelectorAll(".table-sort-js").forEach((table) =>
   table.addEventListener("click", (event) => {
     if (event.target.tagName == "TH") {
       sortTable(event.target.cellIndex, event.target.offsetParent);
@@ -6,7 +6,7 @@ document.querySelectorAll(".table").forEach((table) =>
   })
 );
 
-document.querySelector(".search-input").addEventListener("input", (event) => {
+document.querySelector(".search-input-js").addEventListener("input", (event) => {
   let search = event.target.value;
 
   document.querySelectorAll("tbody tr").forEach((element) => {
