@@ -6,6 +6,19 @@ document.querySelectorAll(".table").forEach((table) =>
   })
 );
 
+document.querySelector(".search-input").addEventListener("input", (event) => {
+  let search = event.target.value;
+
+  document.querySelectorAll("tbody tr").forEach((element) => {
+    //comprend pas pk mais some() marche pas direct
+    let array = Array.from(element.querySelectorAll("td"));
+    let test = array.some((e) => e.innerHTML.includes(search));
+    test
+      ? (element.style.visibility = "visible")
+      : (element.style.visibility = "collapse");
+  });
+});
+
 function sortTable(n, table) {
   var table,
     rows,
