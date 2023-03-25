@@ -11,22 +11,11 @@ import './styles/app.css';
 // start the Stimulus application
 import './bootstrap';
 
-// const $ = require('jquery');
-// // this "modifies" the jquery module: adding behavior to it
-// // the bootstrap module doesn't export/return anything
-// require('bootstrap');
-
-// // or you can include specific pieces
-// // require('bootstrap/js/dist/tooltip');
-// // require('bootstrap/js/dist/popover');
-
-// $(document).ready(function() {
-//     $('[data-toggle="popover"]').popover();
-// });
 
 
 
-document.querySelectorAll(".table-sort-js").forEach((table) =>
+
+document.querySelectorAll(".table-sort-js")?.forEach((table) =>
   table.addEventListener("click", (event) => {
     if (event.target.tagName == "TH") {
       sortTable(event.target.cellIndex, event.target.offsetParent);
@@ -34,10 +23,10 @@ document.querySelectorAll(".table-sort-js").forEach((table) =>
   })
 );
 
-document.querySelector(".search-input-js").addEventListener("input", (event) => {
+document.querySelector(".search-input-js")?.addEventListener("input", (event) => {
   let search = event.target.value;
 
-  document.querySelectorAll("tbody tr").forEach((element) => {
+  document.querySelectorAll("table.table-search-js tbody tr").forEach((element) => {
     //comprend pas pk mais some() marche pas direct
     let array = Array.from(element.querySelectorAll("td"));
     let test = array.some((e) => e.innerHTML.includes(search));
