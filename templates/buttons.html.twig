@@ -1,0 +1,117 @@
+{#
+soit je fait 
+{% set path_to = path('app_client_index') %}    
+{{ block(name,"buttons.html.twig") }}
+
+soit 
+{% with {'path_to' :'path(app_client_index, parameters = [])'} %}
+	{{ block("back","buttons.html.twig") }}
+{% endwith %}
+
+soit 
+{% from 'buttons.html.twig' import next as nexts %}
+	{{nexts(path('app_client_index'))}}
+ou 
+
+{% import "buttons.html.twig" as buttons %}
+{{buttons.next(path_to)}}
+
+soit je sépare tout et j'use include
+#}
+
+
+{% block delete %}
+	<button class="btn btn-primary">
+		<i class="bi bi-trash"></i>
+		Delete
+	</button>
+{% endblock %}
+
+
+
+
+
+
+
+{% block back %}
+	<a href={{ path_to }} class="btn btn-primary">
+		<i class="bi bi-box-arrow-left"></i>
+		back to list
+	</a>
+{% endblock %}
+
+
+
+{% block save %}
+	<button class="btn btn-primary">
+		<i class="bi bi-save-fill"></i>
+		{{ button_label|default('Save') }}
+	</button>
+{% endblock %}
+
+{% block new %}
+	<a href={{ path_to }} class="btn btn-primary">
+		<i class="bi bi-person-plus-fill"></i>
+		Create new
+	</a>
+{% endblock %}
+
+{% block show %}
+	<a href={{ path_to }}>
+		<i class="bi bi-pencil"></i>
+		show
+	</a>
+{% endblock %}
+
+{% block edit %}
+	<a href={{ path_to }}>
+		<i class="bi bi-wrench"></i>
+		edit
+	</a>
+{% endblock %}
+
+
+
+
+
+{% macro back(path_to) %}
+	<a href={{ path_to }} class="btn btn-primary">
+		<i class="bi bi-box-arrow-left"></i>
+		back to list
+	</a>
+{% endmacro %}
+
+{# {% macro delete(path_to) %}
+	<button class="btn btn-primary">
+		<i class="bi bi-trash"></i>
+		Delete
+	</button>
+{% endmacro %} #}
+
+{% macro save(label) %}
+	<button class="btn btn-primary">
+		<i class="bi bi-save-fill"></i>
+		{{ label|default('Save') }}
+	</button>
+{% endmacro %}
+
+{% macro new(path_to) %}
+	<a href={{ path_to }} class="btn btn-primary">
+		<i class="bi bi-person-plus-fill"></i>
+		Create new
+	</a>
+{% endmacro %}
+
+{% macro show(path_to) %}
+	<a href={{ path_to }}>
+		<i class="bi bi-pencil"></i>
+		show
+	</a>
+{% endmacro %}
+
+{% macro edit(path_to) %}
+	<a href={{ path_to }}>
+		<i class="bi bi-wrench"></i>
+		edit
+	</a>
+{% endmacro %}
