@@ -39,6 +39,22 @@ class ClientRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function search($value): array
+    {
+
+        return $this->createQueryBuilder('c')
+        ->where('c.nom = :val')
+        ->orWhere('c.prenom = :val')
+        ->orWhere('c.ville = :val')
+        ->setParameter('val',$value)
+        ->getQuery()
+        ->getResult()
+        ;
+        
+ 
+    }
+
 //    /**
 //     * @return Client[] Returns an array of Client objects
 //     */

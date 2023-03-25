@@ -42,12 +42,12 @@ class ClientController extends AbstractController
 
     #[Route('/{id}', name: 'app_client_show', methods: ['GET'])]
     public function show(Client $client): Response
-    {   
+    {
         $interventions = $client->getInterventions();
         // dd($c);
         return $this->render('client/show.html.twig', [
             'client' => $client,
-            'interventions'=>$interventions,
+            'interventions' => $interventions,
         ]);
     }
 
@@ -72,10 +72,19 @@ class ClientController extends AbstractController
     #[Route('/{id}', name: 'app_client_delete', methods: ['POST'])]
     public function delete(Request $request, Client $client, ClientRepository $clientRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $client->getId(), $request->request->get('_token'))) {
             $clientRepository->remove($client, true);
         }
 
         return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/search', name: 'app_client_search', methods: ['GET'])]
+    public function search(Request $request, ClientRepository $clientRepository,Client $client): Response
+    {
+  
+        return $this->render('client/index.html.twig', [
+            'clients' => $clientRepository->search($request->get('s')),
+        ]);
     }
 }
