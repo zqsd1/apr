@@ -7,8 +7,9 @@
 	<h1>Create new Client</h1>
 
 	{{ include('client/_form.html.twig') }}
-
-	<a href="{{ path('app_client_index') }}" class="btn btn-primary">
-		<i class="bi bi-box-arrow-left"></i>
-		back to list</a>
+	{% import "buttons.html.twig" as buttons %}
+	{{buttons.back(path('app_client_index'))}}
+	{# <a href="{{ path('app_client_index') }}" class="btn btn-primary">
+			<i class="bi bi-box-arrow-left"></i>
+			back to list</a> #}
 {% endblock %}

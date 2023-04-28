@@ -4,56 +4,60 @@
 {% endblock %}
 
 {% block body %}
-{{ include('_search.html.twig') }}
-
+	{{ include('_search.html.twig') }}
+	{% import "buttons.html.twig" as buttons %}
 	<h1>Client index</h1>
-<div class="table-responsive-sm">
-	<table class="table table-sort-js table-search-js">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Nom</th>
-				<th>Prenom</th>
-				<th>ville</th>
-				<th>mail</th>
-				<th>Phone</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for client in clients %}
+	<div class="table-responsive-sm">
+		<table class="table table-sort-js table-search-js">
+			<thead>
 				<tr>
-					<td>{{ client.id }}</td>
-					<td>{{ client.nom }}</td>
-					<td>{{ client.prenom }}</td>
-					<td>{{ client.ville }}</td>
-					<td>
-						<a href="mail:{{ client.mail }}">{{ client.mail }}</td>
-					</td>
-					<td>
-						<a href="tel:{{ client.phone }}">{{ client.phone }}</a>
-					</td>
-					<td>
-						<a href="{{ path('app_client_show', {'id': client.id}) }}">
-							<i class="bi bi-pencil"></i>
-							show
-						</a>
-						<a href="{{ path('app_client_edit', {'id': client.id}) }}">
-							<i class="bi bi-wrench"></i>
-							edit
-						</a>
-					</td>
+					<th>Id</th>
+					<th>Nom</th>
+					<th>Prenom</th>
+					<th>ville</th>
+					<th>mail</th>
+					<th>Phone</th>
+					<th>actions</th>
 				</tr>
-			{% else %}
-				<tr>
-					<td colspan="5">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-</div>
+			</thead>
+			<tbody>
+				{% for client in clients %}
+					<tr>
+						<td>{{ client.id }}</td>
+						<td>{{ client.nom }}</td>
+						<td>{{ client.prenom }}</td>
+						<td>{{ client.ville }}</td>
+						<td>
+							<a href="mail:{{ client.mail }}">{{ client.mail }}</td>
+						</td>
+						<td>
+							<a href="tel:{{ client.phone }}">{{ client.phone }}</a>
+						</td>
+						<td>
 
-	<a href="{{ path('app_client_new') }}" class="btn btn-primary">
-		<i class="bi bi-person-plus-fill"></i>
-		Create new</a>
+							{{buttons.show(path('app_client_show', {'id': client.id}) )}}
+							{{buttons.edit(path('app_client_edit', {'id': client.id}))}}
+							{# <a href="{{ path('app_client_show', {'id': client.id}) }}">
+																					<i class="bi bi-pencil"></i>
+																					show
+																				</a>
+																				<a href="{{ path('app_client_edit', {'id': client.id}) }}">
+																					<i class="bi bi-wrench"></i>
+																					edit
+																				</a> #}
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	{{buttons.new( path('app_client_new'))}}
+	{# <a href="{{ path('app_client_new') }}" class="btn btn-primary">
+				<i class="bi bi-person-plus-fill"></i>
+				Create new</a> #}
 {% endblock %}
